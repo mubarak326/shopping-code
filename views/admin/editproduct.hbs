@@ -1,0 +1,37 @@
+<section>
+<form action="/admin/editproduct/{{product._id}}" method="post" enctype="multipart/form-data">
+<div class="container">
+ <h2 class="text-center mt-5">Edit Product</h2>
+<div class="col-md-6 mt-5">
+
+  
+    <label for="">Name</label>
+    <input type="text"name="Name" class="form-control"value="{{product.Name}}">
+    
+
+  
+    <label for="">Product</label>
+    <input type="text" name="Product" class="form-control"value="{{product.Product}}">
+  
+   
+   
+    <label for="">Price</label>
+    <input type="number" name="Price" class="form-control"value="{{product.Price}}">
+  
+
+  
+    <label for="">Image</label>
+    <img src='/product-image/{{product._id}}.jpg'alt="" style="width:100px; height:auto" id='imgview'>
+    <input type="file" name="Image"class="form-control" onchange="viewImage(event)">
+  
+<button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  </div>
+</form>
+</section>
+<script>
+    function viewImage(event)
+    {
+        document.getElementById('imgview').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>

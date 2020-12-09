@@ -1,0 +1,78 @@
+<section>
+     <div class="container-fluid">
+    <table class="table mt-5">
+       
+  <thead>
+    <tr>
+      
+      <th scope="col">Product</th>
+      <th scope="col">Add items</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each products}}
+    <tr>
+      
+      <td>{{this.product.Name}}</td>
+      
+      <td>
+        <button class="cartitemcount mr-3" onclick="changequantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button><span id="{{this.product._id}}">{{this.quantity}}</span><button class="cartitemcount ml-3" onclick="changequantity('{{this._id}}','{{this.product._id}}','{{user._id}}',1)">+</button>  
+      </td>
+      <td>{{this.product.Price}}</td>
+
+      
+      <td>
+        
+        <img style="width:50px;height:50px;" src="/product-image/{{this.product._id}}.jpg">
+      </td>
+      <td>
+
+      
+            <a href="/delete-product/('{{this._id}}','{{this.product._id}}')" class="btn btn-danger">Remove</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+  
+</table>
+<hr>
+<div class="container-fluid">
+<div class="col-6">
+  <h3 class="mt-2">TOTAL PRICE:<span id="Total">{{totalvalue}}</span></h3><br>
+  
+  <a href="/continue-pay" class="btn btn-warning active" style="width:50%;"><b>continue</b></a>
+  </div>
+</div>
+</div>
+</section>
+<script>
+ function changequantity(cartId,proId,userId,count)
+  {
+    var quantity=parseInt(document.getElementById(proId).innerHTML)
+    count=parseInt(count)
+
+   $.ajax({
+      url:'/change-quantity',
+      data:{
+        user:userId,
+        cart:cartId,
+        product:proId,
+        count:count,
+        quantity:quantity
+      },
+      method:'post',
+      success:(response)=>{
+        if(response.removeproduct)
+        {
+        alert("product removed from cart")
+        location.reload()
+        }else{
+          document.getElementById('total').innerHtml=response.total
+          document.getElementById(proId).innerHtml=quantity+count
+        }
+      }
+    })
+  }
+</script>

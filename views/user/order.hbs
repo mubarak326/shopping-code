@@ -1,0 +1,33 @@
+<section>
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th scope="col">Address</th>
+      <th scope="col">Pincode</th>
+      <th scope="col">mobile</th>
+      <th scope="col">TotalAmount</th>
+      <th scope="col">payment Method</th>
+      <th scope="col">status</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each orders}}
+    <tr>
+     <td>1</td>
+      <td>{{this.deliverydetails.address}}</td>
+      <td>{{this.deliverydetails.pincode}}</td>
+      <td>{{this.deliverydetails.mobile}}</td>
+      <td>{{this.totalamount}}</td>
+      <td>{{this.paymentMethod}}</td>
+      <td>{{this.status}}</td>
+      <td>
+          <a href="/view-orderproducts/{{this._id}}" class="btn btn-primary">View Products</a>
+      </td>
+    </tr>
+    {{/each}}
+    <table>
+        </div>
+        </section>
